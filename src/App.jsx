@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import BookPreview from './components/BookPreview';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { FaStar } from 'react-icons/fa';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -23,6 +24,12 @@ function App() {
     return matchesSearch && matchesGenre;
   });
 
+  const getBookRating = (book) => {
+    const ratings = book.reviews.map(review => review.rating);
+    const averageRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    return averageRating.toFixed(1);
+  };
+
   return (
     <Router>
       <Routes>
@@ -41,7 +48,6 @@ function App() {
               />
             </div>
 
-
             <select
               value={genreDropdown}
               onChange={e => setGenreDropdown(e.target.value)}
@@ -59,8 +65,9 @@ function App() {
                   <p><strong>Author:</strong> {book.author}</p>
                   <p><strong>Title:</strong> {book.title}</p>
                   <p><strong>Genre:</strong> {book.genre}</p>
+                  <strong>Rating: </strong><p className='italic text-yellow-500 text-2xl'>{getBookRating(book)}</p>
                   <Link to={`/book-preview/${encodeURIComponent(book.title)}`}>
-                    <button className='mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded'>
+                    <button className='mt-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded'>
                       Preview
                     </button>
                   </Link>
