@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     fetch('https://api.npoint.io/779d97ded1f52a505689')
       .then((response) => response.json())
-      .then(setBooks);
+      .then(data => setBooks(data));
   }, []);
 
   const genres = Array.from(new Set(books.map(book => book.genre)));
@@ -25,6 +25,7 @@ function App() {
   });
 
   const getBookRating = (book) => {
+    if (!book.reviews.length) return '0.0';
     const ratings = book.reviews.map(review => review.rating);
     const averageRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
     return averageRating.toFixed(1);
@@ -33,7 +34,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/book-preview/:title' element={<BookPreview books={books} />} />
+        <Route path='/book-preview/:title' element={<BookPreview books={books} setBooks={setBooks} />} />
         <Route path='/' element={
           <div className='text-center mt-4'>
             <h1 className='text-3xl font-bold'>BOOKS</h1>
@@ -65,7 +66,8 @@ function App() {
                   <p><strong>Author:</strong> {book.author}</p>
                   <p><strong>Title:</strong> {book.title}</p>
                   <p><strong>Genre:</strong> {book.genre}</p>
-                  <strong>Rating: </strong><p className='italic text-yellow-500 text-2xl'>{getBookRating(book)}</p>
+                  <strong>Rating: </strong>
+                  <p className='italic text-yellow-500 text-2xl'>{getBookRating(book)}</p>
                   <Link to={`/book-preview/${encodeURIComponent(book.title)}`}>
                     <button className='mt-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded'>
                       Preview
